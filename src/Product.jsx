@@ -16,7 +16,7 @@ export default function Product(){
     useEffect(()=>{
       http.GET(`/products/categories/${category}`)
       .then((res)=>{
-        setProducts(res.data);
+        setProducts(res);
       })
       .catch((err)=>{
         console.error(err)

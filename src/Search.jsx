@@ -15,7 +15,7 @@ export default function Search(){
     useEffect(()=>{
       http.GET(`/products/all`)
       .then((res)=>{
-        setProducts(res.data);
+        setProducts(res);
       })
       .catch((err)=>{
         console.error(err)

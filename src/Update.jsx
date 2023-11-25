@@ -59,7 +59,7 @@ export default function Add(props){
     useEffect(()=>{
       http.GET("/products/categories")
       .then((res)=>{
-        setCategories(res.data);
+        setCategories(res);
       })
       .catch((err)=>{
         console.error(err)
