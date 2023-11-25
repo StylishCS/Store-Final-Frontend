@@ -1,8 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { UserContext } from "./UserContext"
-import axios from "axios";
-import ProdCard  from "./components/prodCard";
-import { Link, useLocation,useParams, useNavigate } from 'react-router-dom';
+import {useParams, useNavigate } from 'react-router-dom';
 import Login from "./Login"
 import http from "./http";
 
@@ -59,7 +57,7 @@ export default function Add(props){
     };
 
     useEffect(()=>{
-      axios.get("/products/categories")
+      http.GET("/products/categories")
       .then((res)=>{
         setCategories(res.data);
       })

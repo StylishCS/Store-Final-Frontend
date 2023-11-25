@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react"
 import { UserContext } from "./UserContext"
-import axios from "axios";
 import ProdCard  from "./components/prodCard";
 import { Link } from 'react-router-dom';
 import Login from "./Login"
+import http from "./http";
+
 
 export default function Search(){
     
@@ -12,7 +13,7 @@ export default function Search(){
     const [search, setSearch] = useState("");
     const [found, setFound] = useState([]);
     useEffect(()=>{
-      axios.get(`/products/all`)
+      http.GET(`/products/all`)
       .then((res)=>{
         setProducts(res.data);
       })

@@ -1,10 +1,11 @@
 import {  useParams } from 'react-router-dom';
 import { useContext, useEffect, useState } from "react"
 import { UserContext } from "./UserContext"
-import axios from "axios";
 import ProdCard  from "./components/prodCard";
 import { Link } from 'react-router-dom';
 import Login from "./Login"
+import http from './http';
+
 
 export default function Product(){
     const params = useParams();
@@ -13,7 +14,7 @@ export default function Product(){
     const [products, setProducts] = useState([]);
     const [search, setSearch] = useState("");
     useEffect(()=>{
-      axios.get(`/products/categories/${category}`)
+      http.GET(`/products/categories/${category}`)
       .then((res)=>{
         setProducts(res.data);
       })

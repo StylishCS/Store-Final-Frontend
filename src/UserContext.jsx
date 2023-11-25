@@ -1,13 +1,8 @@
 import { createContext, useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import cookies from "js-cookies";
 
 export const UserContext = createContext();
-
-// axios.defaults.headers.common['Authorization'] = cookies.getItem('token');
-// axios.defaults.baseURL = "https://capris-basket-clam.cyclic.app";
-// axios.defaults.withCredentials = true;
 
 export function UserContextProvider({ children }) {
 

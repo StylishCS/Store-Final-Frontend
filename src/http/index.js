@@ -1,7 +1,7 @@
 import axios from "axios";
 import cookies from "js-cookies";
 axios.defaults.headers.common["Authorization"] = cookies.getItem("token");
-axios.defaults.baseURL = "https://flstyn-hrh.onrender.com";
+axios.defaults.baseURL = "https://store-final-backend.onrender.com";
 axios.defaults.withCredentials = true;
 //https://capris-basket-clam.cyclic.app/
 const http = {

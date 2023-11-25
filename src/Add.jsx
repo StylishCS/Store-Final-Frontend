@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from "react"
 import { UserContext } from "./UserContext"
-import axios from "axios";
 import Login from "./Login"
 import { Alert } from "@material-tailwind/react";
-
+import http from "./http";
 
 export default function Add(){
     const [name,setName] = useState("");
@@ -51,7 +50,7 @@ export default function Add(){
     };
 
     useEffect(()=>{
-      axios.get("/products/categories")
+      http.GET("/products/categories")
       .then((res)=>{
         setCategories(res.data);
       })
@@ -60,7 +59,7 @@ export default function Add(){
       })
     }, [])
     function logout(){
-        axios.post("/users/logout").then(()=>{
+        http.POST("/users/logout").then(()=>{
             setId(null);
             setEmail(null);
         })
@@ -83,7 +82,7 @@ export default function Add(){
         formData.append("stock", stock);
         formData.append("image", image);
         //console.log(image)
-        axios.post(`/products/add`, formData)
+        http.POST(`/products/add`, formData)
         .then((res)=>{
           //console.log(res)
 
@@ -100,7 +99,7 @@ export default function Add(){
 
       else{
         console.log("flag")
-        axios.post(`/products/add`, {name, category, sellPrice, netPrice, labelId, stock})
+        http.POST(`/products/add`, {name, category, sellPrice, netPrice, labelId, stock})
         .then((res)=>{
           //console.log(res)
           setShowAlert(true);

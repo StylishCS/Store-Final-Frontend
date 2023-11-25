@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react"
 import { UserContext } from "./UserContext"
-import axios from "axios";
 import CatCard  from "./components/CatCard";
 import AddCard from "./components/AddCard";
 import cookies from "js-cookies"
