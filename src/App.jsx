@@ -19,6 +19,7 @@ import Week from "./Week.jsx";
 import Year from "./Year.jsx";
 import Update from "./Update.jsx";
 import Test from "./Test.jsx";
+import EditInvoice from "./EditInvoice.jsx";
 
 function App() {
 const routes = [{
@@ -72,6 +73,10 @@ const routes = [{
   {
     path: "/update/:id",
     element: <Update />,
+  },
+  {
+    path: "/edit-invoice/:id",
+    element: <EditInvoice />,
   },
 ]
 
