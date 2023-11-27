@@ -104,8 +104,17 @@ function Monthly() {
           >
             <span>استرجاع الفاتوره</span>
           </Button>
+          <Link to={`/edit-invoice/${selected}`}>
+            <Button
+            variant="text"
+            color="red"
+            className="mr-1"
+            >
+            <span>تعديل الفاتوره</span>
+          </Button>
+          </Link>
           <Button variant="gradient" color="green" onClick={handleOpen}>
-            <span>Confirm</span>
+            <span>الرجوع للخلف</span>
           </Button>
         </DialogFooter>
       </Dialog>
