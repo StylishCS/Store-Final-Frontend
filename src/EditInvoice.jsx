@@ -109,7 +109,7 @@ function handleUpdate(){
     // .catch((err)=>{
     //     console.log(err)
     // })
-    http.DELETE(`/invoices/deleteItems/${params.id}`, invoice)
+    http.DELETE(`/statistics/invoices/deleteItems/${params.id}`, invoice)
     .then((res)=>{
         navigate("/statistics")
     })
