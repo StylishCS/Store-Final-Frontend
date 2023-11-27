@@ -137,6 +137,7 @@ export default function Add(props){
     
       <img
         src={viewImage}
+        width={500}
         alt="Uploaded"
         className="rounded-lg object-cover"
       />

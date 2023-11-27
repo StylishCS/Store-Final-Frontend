@@ -45,7 +45,9 @@ function EditInvoice() {
 }
 
 function handleRemove(id) {
-    const updatedProducts = products.filter((product) => product._id !== id);
+    const updatedProducts = products.map((product) =>
+        product._id === id ? { ...product, quantity: 0 } : product
+    );
 
     setInvoice((prevInvoice) => ({
         ...prevInvoice,
@@ -87,29 +89,12 @@ function decreaseQuantity(id) {
 }
 
 function increaseQuantity(id) {
-    const updatedProducts = products.map((product) =>
-        product._id === id ? { ...product, quantity: product.quantity + 1 } : product
-    );
-
-    setInvoice((prevInvoice) => ({
-        ...prevInvoice,
-        products: updatedProducts,
-    }));
-
-    setProducts(updatedProducts);
-    updateTotalPrice(updatedProducts);
+    // can't increase quantity
 }
 
 function handleUpdate(){
     console.log(invoice);
-    // axios.delete(`http://localhost:8080/statistics/invoices/deleteItems/${params.id}`,{data: {invoice: invoice}})
-    // .then((res)=>{
-    //     navigate("/statistics")
-    // })
-    // .catch((err)=>{
-    //     console.log(err)
-    // })
-    http.DELETE(`/statistics/invoices/deleteItems/${params.id}`, invoice)
+    http.PATCH(`/statistics/invoices/deleteItems/${params.id}`, {invoice})
     .then((res)=>{
         navigate("/statistics")
     })
@@ -119,6 +104,9 @@ function handleUpdate(){
 }
   return (
     <>
+    <div className="h-screen bg-gray-100 pt-20">
+        <h1 className="mb-10 text-center text-2xl font-bold">Invoice Items</h1>
+      <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
         {/* product cards */}
         {
             products.map((product)=>{
@@ -179,6 +167,8 @@ function handleUpdate(){
           </button>
         </div>
         {/* Subtotal */}
+        </div>
+        </div>
     </>
   )
 }
