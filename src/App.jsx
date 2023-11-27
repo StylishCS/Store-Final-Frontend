@@ -20,7 +20,6 @@ import Year from "./Year.jsx";
 import Update from "./Update.jsx";
 import Test from "./Test.jsx";
 
-
 function App() {
 const routes = [{
     index: true,
@@ -83,7 +82,7 @@ const router = createBrowserRouter([
     element: 
     <UserContextProvider>
       <CartProvider>
-      <RootLayout />
+        <RootLayout />
       </CartProvider>
     </UserContextProvider>,
     children: routes,

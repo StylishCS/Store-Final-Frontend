@@ -16,6 +16,8 @@ function Statistics() {
     const [month, setMonth] = useState(0);
     const [week, setWeek] = useState(0)
     const [year, setYear] = useState(0)
+    const [totalSell, setTotalSell] = useState(0)
+    const [totalNet, setTotalNet] = useState(0)
     const [invoices, setInvoices] = useState([])
 
     const [invoice, setInvoice] = useState([])
@@ -77,6 +79,20 @@ function Statistics() {
         })
         .catch(err=>{
             console.log(err);
+        })//////////////
+        http.GET("/statistics/totalNet")
+        .then((res)=>{
+            setTotalNet(res[0].total);
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+        http.GET("/statistics/totalSell")
+        .then((res)=>{
+            setTotalSell(res[0].total);
+        })
+        .catch(err=>{
+            console.log(err);
         })
         http.GET("/statistics/invoices/all")
         .then(res=>{
@@ -119,6 +135,15 @@ function Statistics() {
           >
             <span>استرجاع الفاتوره</span>
           </Button>
+          <Link to={`/edit-invoice/${selected}`}>
+            <Button
+            variant="text"
+            color="red"
+            className="mr-1"
+            >
+            <span>تعديل الفاتوره</span>
+          </Button>
+          </Link>
           <Button variant="gradient" color="green" onClick={handleOpen}>
             <span>الرجوع للخلف</span>
           </Button>
@@ -174,6 +199,24 @@ function Statistics() {
              <p className="py-4 text-3xl ml-5">{year}</p>
         </div>
         </Link>
+        <div className="w-full sm:w-72 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">
+                <div className="h-20 bg-yellow-900 flex items-center justify-between">
+                    <p className="mr-0 text-white text-lg pl-5">اجمالي جمله المخزن</p>
+                </div>
+                <div className="flex justify-between pt-6 px-5 mb-2 text-sm text-gray-600">
+                    <p>TOTAL</p>
+                </div>
+             <p className="py-4 text-3xl ml-5">{totalNet}</p>
+        </div>
+        <div className="w-full sm:w-72 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">
+                <div className="h-20 bg-brown-900 flex items-center justify-between">
+                    <p className="mr-0 text-white text-lg pl-5">اجمالي سعر بيع المخزن</p>
+                </div>
+                <div className="flex justify-between pt-6 px-5 mb-2 text-sm text-gray-600">
+                    <p>TOTAL</p>
+                </div>
+             <p className="py-4 text-3xl ml-5">{totalSell}</p>
+        </div>
       </div>
     </div>
 
