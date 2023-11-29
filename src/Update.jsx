@@ -25,6 +25,19 @@ export default function Add(props){
 
     const [image, setImage] = useState(null);
     const [viewImage, setViewImage] = useState(null);
+    const [changed, setChanged] = useState(false);
+    const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setChanged(true);
+      setImage(file)
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setViewImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
     const [prod, setProd] = useState({});
     useEffect(()=>{
@@ -73,6 +86,23 @@ export default function Add(props){
     }
     function handleUpdate(e){
       e.preventDefault();
+      if(changed){
+        let formData = new FormData();
+        formData.append("labelId", labelId);
+        formData.append("name", name);
+        formData.append("sellPrice", sellPrice);
+        formData.append("netPrice", netPrice);
+        formData.append("stock", stock);
+        formData.append("image", image);
+        http.PATCH(`/products/update/${params.id}`, formData)
+        .then((res)=>{
+          navigate("/");
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
+      }
+      else{
         http.PATCH(`/products/update/${params.id}`,{
           labelId: labelId,
           name: name,
@@ -80,7 +110,13 @@ export default function Add(props){
           sellPrice: sellPrice,
           stock: stock,
         })
-        navigate("/");
+        .then((res)=>{
+          navigate("/");
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
+      }
     }
     useEffect(() => {
       // This effect will trigger when either selectedItem or customItem changes
@@ -135,12 +171,16 @@ export default function Add(props){
     </div>
     
     
-      <img
-        src={viewImage}
-        width={500}
-        alt="Uploaded"
-        className="rounded-lg object-cover"
-      />
+      
+      <label htmlFor="dropzone-file">
+                <img
+                  src={viewImage}
+                  width={500}
+                  alt="Uploaded"
+                  className="rounded-lg object-cover"
+                />
+            <input id="dropzone-file" type="file" className="hidden" onChange={handleImageUpload} />
+        </label>
     
     <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
     <button onClick={handleDelete} className="text-white mt-1 bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">مسح المنتج</button>

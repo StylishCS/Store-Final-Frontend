@@ -13,7 +13,6 @@ import { Link } from "react-router-dom";
 
 
 const ProdCard = ({data})=>{
-  console.log(data.image)
     const {addToCart} = useContext(CartContext);
     const [quantity, setQuantity] = useState(0);
     const increment = () =>{
@@ -31,6 +30,7 @@ const ProdCard = ({data})=>{
         <img
           src={data.image}
           alt="card-image"
+          className="w-full h-full object-cover"
         />
       </CardHeader>
       <CardBody>
