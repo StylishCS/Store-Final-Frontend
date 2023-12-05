@@ -108,7 +108,7 @@ function Statistics() {
     {showAlert && (
         <Alert className='fixed mt-8 top-4 left-1/2 transform -translate-x-1/2 z-20' color="green">تم استرجاع الفاتوره بنجاح</Alert>
       )}
-    <Dialog open={open} handler={handleOpen}>
+    <Dialog open={open} handler={handleOpen} style={{ maxHeight: '80vh', overflowY: 'auto' }}>
         <DialogHeader>{selected}</DialogHeader>
         <DialogBody>
           {products.map((p, index) => (
